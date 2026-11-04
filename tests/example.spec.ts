@@ -33,7 +33,11 @@ test.skip('TCS Page', async ({ page }) => {
 
 test('Bank of Baroda', async ({ page }) => {
   await page.goto('https://www.bobibanking.com/index.html');
-  await page.goto('https://bobibanking.bankofbaroda.bank.in/');
+  await page.goto('https://www.bobibanking.bankofbaroda.bank.in/', {
+    waitUntil: 'domcontentloaded',
+    timeout: 60000
+  });
+
   await page.getByRole('button', { name: 'What is new' }).click();
   page.once('dialog', dialog => {
     console.log(`Dialog message: ${dialog.message()}`);
@@ -43,9 +47,9 @@ test('Bank of Baroda', async ({ page }) => {
   await page.getByRole('navigation').getByRole('link', { name: 'Contact Us' }).click();
   await page.locator('section').click();
   await page.getByRole('link', { name: 'Sitemap' }).click();
-  
+
   const [page1] = await Promise.all([
-  page.waitForEvent('popup'),
-  page.getByRole('link', { name: 'Australia' }).click()
-]);
+    page.waitForEvent('popup'),
+    page.getByRole('link', { name: 'Australia' }).click()
+  ]);
 });
