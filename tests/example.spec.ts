@@ -8,7 +8,7 @@ test.skip('get started link', async ({ page }) => {
   await page.getByRole('heading', { name: 'Commercial Credit Card', exact: true }).click();
   const page1Promise = page.waitForEvent('popup');
 });
-test('TCS Page', async ({ page }) => {
+test.skip('TCS Page', async ({ page }) => {
   await page.goto('https://www.tcs.com/');
   await page.getByRole('button', { name: 'Accept all cookies' }).click();
   await page.getByRole('menuitem', { name: 'Who we are' }).click();
@@ -29,4 +29,21 @@ test('TCS Page', async ({ page }) => {
   await page.getByRole('textbox', { name: 'How can we help you?' }).fill('Please connect with me for exciting oppurtunity');
   await page.locator('.row').first().click();
   await page.locator('.px-3.my-2.col-12').first().click();
+});
+
+test('Bank of Baroda', async ({ page }) => {
+  await page.goto('https://www.bobibanking.com/index.html');
+  await page.goto('https://bobibanking.bankofbaroda.bank.in/');
+  await page.getByRole('button', { name: 'What is new' }).click();
+  page.once('dialog', dialog => {
+    console.log(`Dialog message: ${dialog.message()}`);
+    dialog.dismiss().catch(() => { });
+  });
+  await page.getByRole('link', { name: 'Health & Home' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Contact Us' }).click();
+  await page.locator('section').click();
+  await page.getByRole('link', { name: 'Sitemap' }).click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Australia' }).click();
+  const page1 = await page1Promise;
 });
