@@ -43,7 +43,10 @@ test('Bank of Baroda', async ({ page }) => {
   await page.getByRole('navigation').getByRole('link', { name: 'Contact Us' }).click();
   await page.locator('section').click();
   await page.getByRole('link', { name: 'Sitemap' }).click();
-  const page1Promise = page.waitForEvent('popup');
+  
+  const [page1] = await Promise.all([
+  page.waitForEvent('popup'),
+  page.getByRole('link', { name: 'Australia' }).click()
+]);
   await page.getByRole('link', { name: 'Australia' }).click();
-  const page1 = await page1Promise;
 });
