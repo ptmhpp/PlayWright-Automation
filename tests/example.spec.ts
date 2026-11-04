@@ -48,5 +48,4 @@ test('Bank of Baroda', async ({ page }) => {
   page.waitForEvent('popup'),
   page.getByRole('link', { name: 'Australia' }).click()
 ]);
-  await page.getByRole('link', { name: 'Australia' }).click();
 });
