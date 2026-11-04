@@ -33,7 +33,7 @@ test.skip('TCS Page', async ({ page }) => {
 
 test('Bank of Baroda', async ({ page }) => {
   await page.goto('https://www.bobibanking.com/index.html');
-  await page.goto('https://www.bobibanking.bankofbaroda.bank.in/', {
+  await page.goto('https://www.bobibanking.com/index.html', {
     waitUntil: 'domcontentloaded',
     timeout: 60000
   });
